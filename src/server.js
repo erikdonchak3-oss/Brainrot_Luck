@@ -39,6 +39,7 @@ function validateInitData(initData) {
   const secretKey = crypto.createHmac('sha256', BOT_TOKEN).update('WebAppData').digest();
   const secretKey = crypto.createHmac('sha256', BOT_TOKEN).update('WebAppData').digest();
   const calculated = crypto.createHmac('sha256', secretKey).update(dataCheckString).digest('hex');
+
   const a = Buffer.from(calculated, 'hex');
   const b = Buffer.from(hash, 'hex');
   if (a.length !== b.length || !crypto.timingSafeEqual(a, b)) throw new Error('Invalid Telegram signature');
