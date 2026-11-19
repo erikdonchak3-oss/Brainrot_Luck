@@ -36,7 +36,7 @@ function validateInitData(initData) {
   params.delete('hash');
   params.delete('signature');
   const dataCheckString = [...params.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([k, v]) => `${k}=${v}`).join('\n');
-  const secretKey = crypto.createHmac('sha256', 'WebAppData').update(BOT_TOKEN).digest();
+  const secretKey = crypto.createHmac('sha256', BOT_TOKEN).update('WebAppData').digest();
   const calculated = crypto.createHmac('sha256', secretKey).update(dataCheckString).digest('hex');
   const a = Buffer.from(calculated, 'hex');
   const b = Buffer.from(hash, 'hex');
